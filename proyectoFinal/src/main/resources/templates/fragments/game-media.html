@@ -1,0 +1,9 @@
+<!-- src/main/resources/templates/fragments/game-media.html -->
+<section class="p-6">
+  <h2 class="text-2xl font-semibold mb-4">Capturas</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <img th:each="shot : ${screenshots}"
+         th:src="${shot.image}"
+         class="rounded-lg object-cover h-40 w-full lazyload"/>
+  </div>
+</section>

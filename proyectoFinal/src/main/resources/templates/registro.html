@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Registro y Login</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Enlace al CSS con Thymeleaf -->
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+	<!-- Video de fondo -->
+	<video autoplay muted loop class="background-video">
+		<source th:src="@{/videos/mivideo.mp4}" type="video/mp4">
+		Tu navegador no soporta videos HTML5.
+	</video>
+	<br>
+	<br>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<img th:src="@{/images/logo.png}" alt="Logo" class="logo mb-3">
+				<h1>Regístrate</h1>
+
+
+				<form th:action="@{/registro}" method="post" th:object="${usuario}">
+
+					<!-- Campo Nombre -->
+					<div class="form-group-registro">
+						<label for="nombre">Nombre:</label> <input id="nombre" type="text"
+							class="form-control-registro" th:field="*{nombre}" required>
+						<div th:if="${#fields.hasErrors('nombre')}"
+							class="alert alert-danger">
+							<p th:errors="*{nombre}"></p>
+						</div>
+					</div>
+
+					<!-- Campo Apellido -->
+					<div class="form-group-registro">
+						<label for="apellido">Apellido:</label> <input id="apellido"
+							type="text" class="form-control-registro" th:field="*{apellido}"
+							required>
+						<div th:if="${#fields.hasErrors('apellido')}"
+							class="alert alert-danger">
+							<p th:errors="*{apellido}"></p>
+						</div>
+					</div>
+
+					<!-- Campo Email -->
+					<div class="form-group-registro">
+						<label for="email">Email:</label> <input id="email" type="email"
+							class="form-control-registro" th:field="*{email}" required>
+						<div th:if="${#fields.hasErrors('email')}"
+							class="alert alert-danger">
+							<p th:errors="*{email}"></p>
+						</div>
+					</div>
+
+					<!-- Campo Password -->
+					<div class="form-group-registro">
+						<label for="password">Password:</label> <input id="password"
+							type="password" class="form-control-registro"
+							th:field="*{password}" required>
+						<div th:if="${#fields.hasErrors('password')}"
+							class="alert alert-danger">
+							<p th:errors="*{password}"></p>
+						</div>
+					</div>
+			</div>
+			<!-- Botón Registrar -->
+			<div class="form-group-registro">
+				<button type="submit" class="btn btn-primary-registrar">Registrar</button>
+				<span class="inicia-aqui">Si estás registrado, <a
+					th:href="@{/login}">inicia sesión aquí</a>.
+				</span>
+			</div>
+
+			<!-- Token CSRF -->
+			<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
+			</form>
+		</div>
+	</div>
+	</div>
+	<script th:src="@{/js/script.js}"></script>
+	<!-- Ruta al archivo JS -->
+</body>
+</html>

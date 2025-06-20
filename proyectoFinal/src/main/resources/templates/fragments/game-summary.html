@@ -1,0 +1,9 @@
+<!-- src/main/resources/templates/fragments/game-summary.html -->
+<div class="flex items-center space-x-6 p-6">
+  <img th:src="${game.background_image}" class="w-48 rounded-lg shadow-md"/>
+  <div>
+    <h1 class="text-4xl font-bold" th:text="${game.name}">Título</h1>
+    <p class="text-gray-400" th:text="${game.released}">Fecha</p>
+    <a th:href="${game.website}" class="text-accent hover:underline">Web oficial</a>
+  </div>
+</div>

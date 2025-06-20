@@ -1,0 +1,230 @@
+/* --- Estilos globales --- */
+* {
+    margin: 0; /* Eliminar márgenes predeterminados */
+    padding: 0; /* Eliminar padding predeterminado */
+    box-sizing: border-box; /* Incluye borde y padding en el ancho/alto de los elementos */
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Estilo de texto principal */
+    display: flex; /* Organiza elementos en flexbox */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    height: 100vh; /* La altura del cuerpo ocupa toda la ventana */
+    background: #1a1a2e; /* Fondo de color oscuro */
+    color: #ffffff;
+    margin: 0;
+     /* Texto de color blanco */
+}
+
+/* --- Video de fondo --- */
+.background-video {
+    position: fixed; /* Asegura el video en un lugar específico */
+    top: 0; /* Posición en la parte superior */
+    left: 0; /* Posición en la parte izquierda */
+    width: 100%; /* Anchura completa */
+    height: 100%; /* Altura completa */
+    object-fit: cover; /* Asegura que el video cubra todo el espacio */
+    z-index: -1; /* Ubica el video detrás del contenido */
+    filter: brightness(50%); /* Oscurece el video */
+}
+
+/* --- Contenedor principal --- */
+.container {
+    position: relative; /* Posicionamiento relativo para que los hijos puedan ajustarse */
+    padding-top: 80px; /* Espacio superior para elementos superpuestos como el logo */
+    background: rgba(255, 255, 255, 0.1); /* Fondo translúcido */
+    border-radius: 12px; /* Bordes redondeados */
+    padding: 2rem; /* Espaciado interno */
+    max-width: 400px; /* Máxima anchura del contenedor */
+    width: 90%; /* Ocupa el 90% del ancho disponible */
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.5); /* Sombra inicial para el contenedor */
+    text-align: center; /* Centra el texto dentro del contenedor */
+    animation: glowing 3s infinite; /* Agrega una animación de brillo */
+}
+
+/* Animación de la luz tenue azul */
+@keyframes glowing {
+    0% {
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.4); /* Sombra inicial tenue */
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(0, 0, 255, 0.8); /* Sombra más intensa en el pico */
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.4); /* Retorna a la sombra inicial */
+    }
+}
+
+/* --- Logo --- */
+.logo {
+    position: absolute; /* Ubica el logo sin afectar el flujo del documento */
+    top: -128px; /* Desplaza el logo hacia arriba */
+    left: 50%; /* Alinea el logo horizontalmente al centro */
+    transform: translateX(-50%); /* Ajusta la posición centrada exacta */
+    max-width: 200px; /* Tamaño máximo del logo */
+    height: auto; /* Ajusta automáticamente la altura en proporción */
+}
+
+/* --- Título principal --- */
+h1 {
+    font-size: 1.8rem; /* Tamaño de fuente */
+    margin-bottom: 1rem; /* Espacio debajo del título */
+    color: #ffffff; /* Color del texto */
+    text-shadow: 0px 3px 8px rgba(0, 0, 0, 0.5); /* Sombra en el texto */
+}
+
+/* --- Campos del formulario --- */
+.form-group {
+    margin-bottom: 1.2rem; /* Espacio debajo de cada grupo del formulario */
+}
+
+label {
+    display: block; /* Cada etiqueta ocupa una línea completa */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    margin-bottom: 0.5rem; /* Espaciado debajo del texto */
+    color: #dddddd; /* Color claro del texto */
+    text-align: left; /* Alinea las etiquetas a la izquierda */
+}
+
+input {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 0.6rem; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño de fuente */
+    border: none; /* Elimina borde predeterminado */
+    border-radius: 8px; /* Bordes redondeados */
+    background: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
+    color: #ffffff; /* Color del texto */
+    outline: none; /* Elimina el borde azul al seleccionar */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra en el borde del input */
+}
+
+input::placeholder {
+    color: #cccccc; /* Color del texto del marcador (placeholder) */
+}
+
+input:focus {
+    background: rgba(255, 255, 255, 0.3); /* Fondo más claro cuando se selecciona */
+    border: 1px solid #4cafef; /* Borde azul brillante */
+    box-shadow: 0px 0px 8px rgba(76, 175, 239, 0.7); /* Efecto de sombra azul brillante */
+}
+
+/* --- Botón principal --- */
+button {
+    width: 100%; /* Ocupa todo el ancho */
+    background-color: #4cafef; /* Color azul claro */
+    color: #ffffff; /* Color blanco del texto */
+    border: none; /* Sin borde */
+    padding: 0.8rem; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño de fuente */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: all 0.3s ease; /* Animación suave en los cambios */
+    font-weight: bold; /* Texto en negrita */
+}
+
+button:hover {
+    background-color: #3b94d1; /* Color más oscuro al pasar sobre el botón */
+    box-shadow: 0px 5px 15px rgba(59, 148, 209, 0.5); /* Sombra al pasar sobre el botón */
+    transform: translateY(-2px); /* Mueve el botón hacia arriba */
+}
+
+button:active {
+    transform: translateY(2px); /* Mueve el botón hacia abajo al hacer clic */
+    box-shadow: none; /* Elimina la sombra al hacer clic */
+}
+
+/* --- Mensajes de alerta --- */
+.alert {
+    padding: 1rem; /* Espaciado interno */
+    margin-bottom: 1rem; /* Espaciado inferior */
+    border-radius: 8px; /* Bordes redondeados */
+    text-align: center; /* Centra el texto */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.alert-danger {
+    background: rgba(255, 77, 77, 0.2); /* Fondo rojo claro */
+    color: #ff4d4d; /* Texto rojo */
+}
+
+.alert-success {
+    background: rgba(77, 255, 77, 0.2); /* Fondo verde claro */
+    color: #4dff4d; /* Texto verde */
+}
+
+.alert-info {
+    background: rgba(77, 77, 255, 0.2); /* Fondo azul claro */
+    color: #4d4dff; /* Texto azul */
+}
+
+/* --- Registro --- */
+.registrate {
+    font-size: 0.9rem; /* Tamaño de fuente */
+    color: #4cafef; /* Color azul claro */
+    margin-top: 1.5rem; /* Espaciado superior */
+    display: inline-block; /* Estilo de enlace compacto */
+    text-decoration: none; /* Sin subrayado */
+    transition: color 0.3s ease; /* Transición suave en el cambio de color */
+}
+
+.registrate:hover {
+    color: #3b94d1; /* Color más oscuro */
+    text-shadow: 0 0 8px rgba(59, 148, 209, 0.8); /* Sombra luminosa en el texto */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño del texto */
+    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease; /* Efecto suave de transición */
+}
+
+/* --- Adaptabilidad --- */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem; /* Reduce el tamaño del título en pantallas pequeñas */
+    }
+
+    input, button {
+        font-size: 0.9rem; /* Reduce el tamaño de fuente en los campos */
+        padding: 0.7rem; /* Reduce el padding en pantallas pequeñas */
+    }
+
+    .alert {
+        font-size: 0.8rem; /* Reduce el texto de las alertas */
+    }
+}
+.form-group-registro button {
+    margin-top: 1.5rem;  /* Agrega un margen superior para separarlo del contenido */
+}
+
+/* Cambiar color del enlace 'Inicia sesión aquí' */
+.login-link {
+    color: #ff6347;  /* Tomate como ejemplo, pero puedes elegir cualquier color */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* Efecto al pasar el cursor sobre el enlace */
+.login-link:hover {
+    color: #e53e3e;  /* Rojo más oscuro */
+    text-decoration: none;
+}
+.inicia-aqui {
+    display: block;
+    margin-top: 10px; /* Espacio por encima */
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+.inicia-aqui a {
+    color: #007bff; /* Color azul para el enlace */
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.inicia-aqui a:hover {
+    color: #ff0000; /* Color azul más oscuro en hover */
+    text-decoration: underline;
+}
+
+
+
+
+

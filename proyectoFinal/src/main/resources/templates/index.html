@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<title>RAMPAGE - Catálogo de Juegos</title>
+
+
+
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"
+	rel="stylesheet" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<link th:href="@{/css/home.css}" rel="stylesheet" />
+
+
+</head>
+
+
+<body class="text-gray-100 antialiased"
+	style="background: linear-gradient(135deg, #000000 0%, #1a1a1a 40%, #333333 100%);">
+	<!-- Header correctamente estructurado -->
+	
+	<header class="backdrop-blur-md bg-primary/75 fixed w-full z-20">
+  
+  <!-- NAV MÓVIL: buscador + burger + avatar, luego logo -->
+ <nav class="lg:hidden max-w-6xl mx-auto bg-gray-900/70 backdrop-blur-sm rounded-b-2xl py-1 p-4 flex flex-col items-center space-y-4 shadow-lg">
+
+    
+    
+     <!-- fila 2: logo centrado -->
+    <div class="mt-4 flex items-center space-x-3">
+      <a th:href="@{/}" class="flex items-center space-x-3">
+        <img th:src="@{/images/Rampage.png}" alt="Logo"
+             class="w-12 h-12 animate-pulse" />
+        <span class="text-3xl font-extrabold text-accent animate-pulse">RAMPAGE</span>
+      </a>
+    </div>
+  </nav>
+    
+    
+    
+    <!-- fila 1: burger + buscador + avatar -->
+    <div class="w-full flex items-center justify-between">
+      <!-- botón hamburguesa (igual que antes) -->
+      <div class="lg:hidden">
+        <button data-collapse-toggle="mobile-menu"
+                class="p-2 bg-gray-800/50 rounded-full hover:bg-gray-800 transition">
+          <i class="fa-solid fa-bars fa-lg text-white"></i>
+        </button>
+      </div>
+
+     
+        <!-- Buscador -->
+     <div class="flex items-center space-x-4 lg:hidden">
+				<div class="relative group">
+					<input id="searchInput" type="text" placeholder="Buscar..."
+						class="w-32 sm:w-48 transition-all duration-300 focus:w-64 pl-10 pr-4 py-2 rounded-full bg-gray-800/70 text-sm focus:bg-white/10 focus:ring-2 focus:ring-accent placeholder-gray-400 text-white placeholder-opacity-75 shadow-lg" />
+					<div
+						class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+						<i
+							class="fa-solid fa-magnifying-glass text-gray-400 group-focus-within:text-accent transition-colors duration-300"></i>
+					</div>
+				</div>
+				</div>
+
+      <!-- avatar (igual que antes) -->
+      <div class="relative">
+        <button id="user-menu-button" type="button"
+                class="flex items-center focus:outline-none lg:hidden"
+                data-dropdown-toggle="user-dropdown"
+                aria-expanded="false" aria-haspopup="true">
+          <img th:src="${user != null and user.avatarUrl != null} 
+                         ? @{${user.avatarUrl}} 
+                         : @{/images/default-avatar.png}"
+               alt="Avatar de perfil"
+               class="w-10 h-10 rounded-full border-2 border-accent object-cover object-center mr-2" />
+        </button>
+      </div>
+    </div>
+
+   
+
+  <!-- MENÚ DESPLEGABLE MÓVIL (sin tocar) -->
+  <div id="mobile-menu" class="hidden bg-primary/90 p-4 lg:hidden">
+    <a th:href="@{/games}" class="block py-2 px-4 rounded-md transition-colors duration-200 hover:text-accent hover:bg-gray-800/30">Catálogo</a>
+    <a th:href="@{/news}" class="block py-2 px-4 rounded-md transition-colors duration-200 hover:text-accent hover:bg-gray-800/30">Noticias</a>
+    <a th:href="@{/favorites}" class="block py-2 px-4 rounded-md transition-colors duration-200 hover:text-accent hover:bg-gray-800/30">Favoritos</a>
+    <a th:href="@{/compatibility}" class="block py-2 px-4 rounded-md transition-colors duration-200 hover:text-accent hover:bg-gray-800/30">PC vs Game</a>
+    <a th:href="@{/posts}" class="block py-2 px-4 rounded-md transition-colors duration-200 hover:text-accent hover:bg-gray-800/30">Publicaciones</a>
+  </div>
+
+  <!-- NAV ESCRITORIO: tu header original, exacto -->
+  <nav class="hidden lg:flex max-w-7xl mx-auto flex items-center justify-between p-4">
+    <div class="flex items-center space-x-3">
+      <a th:href="@{/}" class="flex items-center space-x-3">
+        <img th:src="@{/images/Rampage.png}" alt="Logo"
+             class="w-12 h-12 animate-pulse" />
+        <span class="text-3xl lg:text-4xl font-extrabold text-accent animate-pulse">RAMPAGE</span>
+      </a>
+    </div>
+
+    <div class="hidden lg:flex items-center space-x-5">
+      <a th:href="@{/games}" class="flex items-center hover:text-accent transition">
+        <i class="fa-solid fa-gamepad header-icon mr-1"></i> Catálogo
+      </a>
+      <a th:href="@{/news}" class="flex items-center hover:text-accent transition">
+        <i class="fa-solid fa-rocket header-icon mr-1"></i> Noticias
+      </a>
+      <a th:href="@{/favorites}" class="flex items-center hover:text-accent transition">
+        <i class="fa-solid fa-heart header-icon mr-1"></i> Favoritos
+      </a>
+      <a th:href="@{/compatibility}" class="flex items-center hover:text-accent transition">
+        <i class="fa-solid fa-microchip header-icon mr-1"></i> PC vs Game
+      </a>
+      <a th:href="@{/posts}" class="flex items-center hover:text-accent transition">
+        <i class="fa-solid fa-comments header-icon mr-1"></i> Publicaciones
+      </a>
+    </div>
+
+    <div class="lg:hidden">
+      <button data-collapse-toggle="mobile-menu"
+              class="text-gray-300 hover:text-accent">
+        <i class="fa-solid fa-bars fa-lg"></i>
+      </button>
+    </div>
+
+      <!-- Buscador -->
+     <div class="flex items-center space-x-4">
+				<div class="relative group">
+					<input id="searchInput" type="text" placeholder="Buscar..."
+						class="w-32 sm:w-48 transition-all duration-300 focus:w-64 pl-10 pr-4 py-2 rounded-full bg-gray-800/70 text-sm focus:bg-white/10 focus:ring-2 focus:ring-accent placeholder-gray-400 text-white placeholder-opacity-75 shadow-lg" />
+					<div
+						class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+						<i
+							class="fa-solid fa-magnifying-glass text-gray-400 group-focus-within:text-accent transition-colors duration-300"></i>
+					</div>
+				</div>
+				</div>
+    <div class="relative">
+      <button id="user-menu-button" type="button"
+              class="flex items-center focus:outline-none"
+              data-dropdown-toggle="user-dropdown">
+        <img th:src="${user != null and user.avatarUrl != null} 
+                       ? @{${user.avatarUrl}} 
+                       : @{/images/default-avatar.png}"
+             alt="Avatar de perfil"
+             class="w-10 h-10 rounded-full border-2 border-accent object-cover object-center" />
+      </button>
+      </div>
+</nav>
+      <div id="user-dropdown"
+           class="z-50 hidden bg-gray-800 divide-y divide-gray-700 rounded-lg shadow-lg w-44 absolute right-0 mt-2">
+        <ul class="py-2 text-sm text-gray-200">
+          <li>
+            <a th:href="@{/profile}"
+               class="block px-4 py-2 hover:bg-gray-700 hover:text-white">
+              <i class="fa-solid fa-user-cog mr-2"></i>Configurar perfil
+            </a>
+          </li>
+          <li>
+            <form th:action="@{/logout}" method="post" class="block">
+              <input type="hidden" th:name="${_csrf.parameterName}"
+                     th:value="${_csrf.token}" />
+              <button type="submit"
+                      class="w-full text-left px-4 py-2 hover:bg-gray-700 hover:text-white">
+                <i class="fa-solid fa-sign-out-alt mr-2"></i>Salir
+              </button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    
+  
+
+</header>
+	<main class="pt-32 pb-12 px-4 max-w-7xl mx-auto">
+		<h1 class="text-6xl font-bold text-center mb-12" data-aos="fade-down">
+			Últimas Novedades</h1>
+
+		<!-- grid con items-stretch para forzar altura idéntica -->
+		<div id="gamesContainer"
+			class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-stretch">
+
+			<!-- Cada tarjeta ocupa toda la altura disponible -->
+			<div th:each="game : ${games}" class="relative" data-aos="fade-up">
+
+				<a th:href="@{/games/{slug}(slug=${game.slug})}"
+					class="game-card flex flex-col h-full rounded-xl overflow-hidden transition">
+
+					<!-- Imagen: altura fija -->
+					<div class="h-40 w-full overflow-hidden">
+						<img th:src="${game.backgroundImage}" alt="Portada de juego"
+							class="w-full h-full object-cover" />
+					</div> <!-- Contenido: ocupa el resto -->
+					<div class="flex-1 p-4 flex flex-col justify-between relative">
+						<div>
+							<h2 th:text="${game.name}"
+								class="text-xl font-semibold text-white truncate"></h2>
+							<div class="mt-2 flex flex-wrap gap-1">
+								<span th:each="plat : ${game.platforms}" th:text="${plat}"
+									class="px-2 py-1 bg-gray-700 text-gray-200 rounded-full text-xs truncate"></span>
+							</div>
+						</div>
+
+						<!-- Botón favorito en esquina -->
+						<button type="button"
+							class="fav-btn absolute top-2 right-2 text-3xl z-20">
+							<i class="fa-heart"
+								th:classappend="${favoriteIds.contains(game.id)}
+                                ? ' fa-solid text-red-500'
+                                : ' fa-regular text-white'"></i>
+						</button>
+					</div>
+				</a>
+			</div>
+
+		</div>
+	</main>
+
+
+
+	<div th:replace="fragments/footer :: footer"></div>
+	<!-- Librerías y scripts -->
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"
+		defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+		defer></script>
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		// Array de favoritos desde Thymeleaf
+		const favoriteIds = /*[[${favoriteIds}]]*/[];
+		// CSRF
+		const csrfToken = /*[[${_csrf.token}]]*/'';
+		const csrfHeader = /*[[${_csrf.headerName}]]*/'';
+		/*]]>*/
+	</script>
+
+	<script th:src="@{/js/games.js}" defer></script>
+	<script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head('Detalles de Juego')"></head>
+<body class="text-gray-100 antialiased"
+	style="background: linear-gradient(135deg, #000000 0%, #1a1a1a 40%, #333333 100%);">
+
+	<div th:replace="fragments/header :: header"></div>
+
+<div style="height:2.5rem;"></div>
+	<main class="pt-24 mx-auto w-4/5 space-y-8">
+		<h1 class="text-6xl font-bold text-center mb-8" data-aos="fade-down">Últimas
+			Noticias de Videojuegos</h1>
+
+		<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			<div th:each="article : ${articles}"
+				class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+				<img th:if="${article.urlToImage}" th:src="${article.urlToImage}"
+					alt="Imagen noticia" class="w-full h-48 object-cover" />
+
+				<div class="p-4 space-y-2">
+					<h2 class="text-xl font-semibold" th:text="${article.title}">Título
+						de la noticia</h2>
+					<p class="text-sm text-gray-300" th:text="${article.description}">Descripción
+						breve…</p>
+					<a th:href="${article.url}" target="_blank"
+						class="inline-block mt-2 text-accent hover:underline"> Leer
+						más &rarr; </a>
+				</div>
+			</div>
+		</div>
+
+		<div th:if="${#lists.isEmpty(articles)}"
+			class="text-center text-gray-400">No hay artículos disponibles.
+		</div>
+	</main>
+	<br>
+	<div th:replace="fragments/footer :: footer"></div>
+
+	<!-- Librerías y scripts -->
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"
+		defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+		defer></script>
+	<script th:src="@{/js/games.js}" defer></script>
+</body>
+</html>

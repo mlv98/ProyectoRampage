@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="fragments/head :: head('Detalles de Juego')"></head>
+  <body class="text-gray-100 antialiased"
+	style="background: linear-gradient(135deg, #000000 0%, #1a1a1a 40%, #333333 100%);">
+    <div th:replace="fragments/header :: header"></div>
+    <main class="pt-32 pb-12 px-4 max-w-5xl mx-auto space-y-12">
+      <!-- Summary -->
+      <section class="flex items-center space-x-6" th:fragment="summary">
+        <img th:src="${game.backgroundImage}" class="w-48 rounded-lg shadow-lg"/>
+        <div>
+          <h1 class="text-4xl font-bold" th:text="${game.name}">Título</h1>
+          <p class="text-gray-400" th:text="${game.released}">Fecha</p>
+          <a th:href="${game.website}" class="text-accent hover:underline">Web oficial</a>
+        </div>
+      </section>
+
+      <!-- Description -->
+      <section th:utext="${game.descriptionHtml}" class="prose lg:prose-lg px-2"></section>
+
+      <!-- Media -->
+      <section>
+  <h2 class="text-2xl font-semibold mb-4">Imágenes</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 overflow-visible">
+    <img
+      th:each="shot : ${screenshots}"
+      th:src="${shot.imageUrl}"
+      class="rounded-lg object-cover h-40 w-full
+             transform transition duration-300 ease-in-out
+             hover:scale-150 hover:z-20"
+/>
+  </div>
+</section>
+
+
+      <!-- Statísticas básicas -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div><span class="font-semibold">Metacritic:</span> <span th:text="${game.metacritic}">N/A</span></div>
+        <div><span class="font-semibold">Usuario:</span> <span th:text="${game.rating} + ' / 5'">N/A</span></div>
+        <div><span class="font-semibold">Playtime:</span> <span th:text="${game.playtime} + 'h'">N/A</span></div>
+      </section>
+
+      <!-- Tiendas y Plataformas -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-2">Dónde jugar</h2>
+        <ul class="flex space-x-4 mb-4">
+          <li th:each="p : ${game.parentPlatforms}"><i class="fa-solid fa-check"></i> <span th:text="${p.platform.name}">PC</span></li>
+        </ul>
+        <h3 class="font-semibold">Tiendas:</h3>
+        <ul class="flex space-x-4">
+          <li th:each="s : ${game.stores}"><a th:href="${s.url}" target="_blank" th:text="${s.store.name}">Steam</a></li>
+        </ul>
+      </section>
+
+      <!-- Sugeridos -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-4">También te puede interesar</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+          <div th:each="g : ${suggested}" class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+            <a th:href="@{/games/{slug}(slug=${g.slug})}" class="block hover:opacity-75">
+              <img th:src="${g.backgroundImage}" class="h-32 w-full object-cover"/>
+              <div class="p-2">
+                <h3 class="text-sm font-medium" th:text="${g.name}">Juego</h3>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div th:replace="fragments/footer :: footer"></div>
+    <script th:src="@{/js/lazyload.js}" defer></script>
+  </body>
+</html>
