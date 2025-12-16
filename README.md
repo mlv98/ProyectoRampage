@@ -17,15 +17,15 @@ El sistema compara las especificaciones del usuario (CPU/GPU) contra los requisi
 
 | **Inicio y Portada** | **Catálogo de Juegos** |
 |:---:|:---:|
-| ![Inicio](docs/inicio.jpg) | ![Catálogo](docs/categorias.jpg) |
+| ![Inicio](proyectoFinal/docs/inicio.jpg) | ![Catálogo](proyectoFinal/docs/categorias.jpg) |
 
 | **Detalle de Juego** | **Comprobador de Compatibilidad** |
 |:---:|:---:|
-| ![Detalle](docs/detalles.jpg) | ![Compatibilidad](docs/compatibilidad.jpg) |
+| ![Detalle](proyectoFinal/docs/detalles.jpg) | ![Compatibilidad](proyectoFinal/docs/compatibilidad.jpg) |
 
 | **Comunidad y Feed** | **Noticias Gaming** |
 |:---:|:---:|
-| ![Publicaciones](docs/publicaciones.jpg) | ![Noticias](docs/noticias.jpg) |
+| ![Publicaciones](proyectoFinal/docs/publicaciones.jpg) | ![Noticias](proyectoFinal/docs/noticias.jpg) |
 
 > *El sistema también incluye módulos de seguridad completos con Login y Registro personalizados.*
 
@@ -73,5 +73,3 @@ El proyecto sigue una arquitectura **Monolítica MVC (Modelo-Vista-Controlador)*
 ## 👨‍💻 Autor
 
 **Mario Larrúa Vega**
-
-
